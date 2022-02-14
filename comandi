@@ -1,5 +1,5 @@
 
-install dashboard:
+installare la dashboard alternativa:
 http://ipminer/action.php?action=shell&cmd=wget https://raw.githubusercontent.com/briffy/PiscesQoLDashboard/main/install.sh -O - | sudo bash
 
 ----------------------------------------------------------------------------------------------------------------------------------------
@@ -17,6 +17,8 @@ sudo wget https://gist.githubusercontent.com/inigoflores/04b110e09b4f101e2ebbb40
 fix segnale: 
 sudo nano /home/pi/hnt/paket/paket/packet_forwarder/global_conf.json
 
+Cambiare rssi_offset radio 0 e radio 1 da -215.4 a -230.4
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 fix dns:
@@ -32,37 +34,41 @@ download snapshot resync:
 wget https://raw.githubusercontent.com/moophlo/pisces-miner-scripts/main/clear_resync_sensecap.sh -O - | sudo bash
 
 -----------------------------------------------------------------------------------------------------------------------------------------
-Restore public key
+Ripristino public key (comando utile, dopo aver flashato un'immagine nuova sulla microsd. Ciò permetterà di accedere al numero seriale del modulo lorawan)
 
 wget http://pisces-firmware.sidcloud.cn/tools/printkey.sh -O - | sudo bash
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 
-Show Log miner command:
+Mostra i log direttamente sul terminale:
 tail -f /home/pi/hnt/miner/log/console.log
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 
-Delete log:
+Calcellare i log in memoria:
 cd /home/pi/hnt/miner/log/
 sudo rm *.log.*
 sudo rm *.log
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 
-install zabbix:
+installare zabbix per monitorare l'hotspot (richiede un'instanza zabbix server):
 sudo apt-get install zabbix-agent
 sudo nano /etc/zabbix/zabbix_agentd.conf
 sudo /etc/init.d/zabbix-agent restart
  
 -----------------------------------------------------------------------------------------------------------------------------------------
 
-install template zabbix rasperry
+installare il template zabbix sull'hotspot:
 sudo nano /etc/zabbix/zabbix_agentd.conf.d/userparameter_rpi.conf
+incollare il seguente contenuto: https://gitlab.com/Qrl/zabbix/-/raw/master/scripts/userparameter_rpi.conf
 sudo usermod -a -G video zabbix
+
+Per maggiori info:
 https://gitlab.com/Qrl/zabbix
 
 -----------------------------------------------------------------------------------------------------------------------------------------
+
 lost_witness_ratio:
 sudo wget https://gist.githubusercontent.com/inigoflores/4d929dc9efdf149319a6a7c07c9250af/raw/01cb398a694a50d45521c2383aa6092296c1b503/lost_witness_ratio.sh -O - | bash
 
@@ -73,11 +79,14 @@ witness_beacon:
 sudo wget https://gist.githubusercontent.com/inigoflores/90b067c4612f5699ba7f3f88a0032f01/raw/cdd4131e7075b7ec26317bb7ddbdaf21ffc68bb8/pisces_witnessed_beacons.sh -O - | bash
 
 -----------------------------------------------------------------------------------------------------------------------------------------
+
 noise profile:
 sudo wget https://gist.githubusercontent.com/inigoflores/3b878e2a7003f7ec7a9c2dc46c597e0c/raw/5f1b324e6631ddef8744093e83bdb0fe554b7435/pisces_noise_profile.sh -O - | bash
 
 -----------------------------------------------------------------------------------------------------------------------------------------
-Fix fastsync
+
+Fix fastsync:
+
 cd /etc/monitor-scripts
 sudo rm fastsync.sh
 sudo nano fastsync.sh
