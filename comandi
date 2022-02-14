@@ -1,0 +1,87 @@
+
+install dashboard:
+http://ipminer/action.php?action=shell&cmd=wget https://raw.githubusercontent.com/briffy/PiscesQoLDashboard/main/install.sh -O - | sudo bash
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+script auto pulizia disco:
+wget https://raw.githubusercontent.com/moophlo/pisces-miner-scripts/main/crontab_job.sh -O - | sudo bash
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+script fix lan:
+sudo wget https://gist.githubusercontent.com/inigoflores/04b110e09b4f101e2ebbb4037c118402/raw/6708a6e3c7ca721a8fc9d0984faa7656672f2290/pisces_fix_lan.sh -O - | bash
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+fix segnale: 
+sudo nano /home/pi/hnt/paket/paket/packet_forwarder/global_conf.json
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+fix dns:
+wget https://raw.githubusercontent.com/moophlo/pisces-miner-scripts/main/fixed_dns.sh -O - | sudo bash
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+Fix region
+wget http://pisces-firmware.sidcloud.cn/PacketForward/Config/V1/EU868.sh -O - | sudo bash
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+download snapshot resync:
+wget https://raw.githubusercontent.com/moophlo/pisces-miner-scripts/main/clear_resync_sensecap.sh -O - | sudo bash
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+Restore public key
+
+wget http://pisces-firmware.sidcloud.cn/tools/printkey.sh -O - | sudo bash
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+Show Log miner command:
+tail -f /home/pi/hnt/miner/log/console.log
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+Delete log:
+cd /home/pi/hnt/miner/log/
+sudo rm *.log.*
+sudo rm *.log
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+install zabbix:
+sudo apt-get install zabbix-agent
+sudo nano /etc/zabbix/zabbix_agentd.conf
+sudo /etc/init.d/zabbix-agent restart
+ 
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+install template zabbix rasperry
+sudo nano /etc/zabbix/zabbix_agentd.conf.d/userparameter_rpi.conf
+sudo usermod -a -G video zabbix
+https://gitlab.com/Qrl/zabbix
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+lost_witness_ratio:
+sudo wget https://gist.githubusercontent.com/inigoflores/4d929dc9efdf149319a6a7c07c9250af/raw/01cb398a694a50d45521c2383aa6092296c1b503/lost_witness_ratio.sh -O - | bash
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+
+witness_beacon:
+sudo wget https://gist.githubusercontent.com/inigoflores/90b067c4612f5699ba7f3f88a0032f01/raw/cdd4131e7075b7ec26317bb7ddbdaf21ffc68bb8/pisces_witnessed_beacons.sh -O - | bash
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+noise profile:
+sudo wget https://gist.githubusercontent.com/inigoflores/3b878e2a7003f7ec7a9c2dc46c597e0c/raw/5f1b324e6631ddef8744093e83bdb0fe554b7435/pisces_noise_profile.sh -O - | bash
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+Fix fastsync
+cd /etc/monitor-scripts
+sudo rm fastsync.sh
+sudo nano fastsync.sh
+
+incollare il seguente contenuto: https://raw.githubusercontent.com/inigoflores/pisces-p100-tools/main/fastsync.sh
+
+------------------------------------------------------------------------------------------------------------------------------------------
