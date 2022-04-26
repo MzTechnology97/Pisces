@@ -1,0 +1,6 @@
+Comandi per effettuare l'aggiornamento del Pisces:
+1 comando:  sudo su
+2 comando:  sudo docker stop miner
+3 comando:  sudo docker rm miner
+4 comando:  sudo docker image pull quay.io/team-helium/miner:miner-arm64_2022.04.19.0_GA
+5 comando:  sudo docker run -d --init --ulimit nofile=64000:64000 --restart always --publish 127.0.0.1:1680:1680/udp --publish 44158:44158/tcp -e OTP_VERSION=23.3.4.7 -e REBAR3_VERSION=3.16.1 --name miner --mount type=bind,source=/home/pi/hnt/miner,target=/var/data --mount type=bind,source=/home/pi/hnt/miner/log,target=/var/log/miner --device /dev/i2c-0  --privileged -v /var/run/dbus:/var/run/dbus --mount type=bind,source=/home/pi/hnt/miner/configs/sys.config,target=/config/sys.config quay.io/team-helium/miner:miner-arm64_2022.04.19.0_GA
